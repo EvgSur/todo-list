@@ -1,0 +1,16 @@
+.list-item__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item__panel span{
+    display: inline-block;
+    border: 1px solid gainsboro;
+    padding: 4px;
+    margin-right: 20px;
+}
+
+.list-item__panel button{
+    margin: 0 5px;
+}

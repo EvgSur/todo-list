@@ -1,0 +1,41 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+.app-container{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+}
+.search-container{
+  display: flex;
+  margin: 25px 0;
+  background-color: ghostwhite;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+body{
+  background: rgb(252,230,240);
+  background: radial-gradient(circle, rgba(252,230,240,1) 0%, rgba(219,235,254,1) 100%);
+}

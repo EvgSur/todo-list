@@ -1,0 +1,13 @@
+.dateSearch-container{
+    border: 1px solid darkgray;
+    padding: 10px;
+    flex-grow: 1;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+.dateSearch-container span{
+    display: inline-block;
+    margin-bottom: 15px;
+}
