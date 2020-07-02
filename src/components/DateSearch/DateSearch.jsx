@@ -34,40 +34,17 @@ class DateSearch extends React.Component {
     };
 
     buttonToggleActive = (btn) => {
-        if (!this.state.activeBtn) {
-            const btnIndex = this.state.buttons.findIndex(el => el === btn);
-            const buttonsCopy = [...this.state.buttons];
-            buttonsCopy[btnIndex] = {...buttonsCopy[btnIndex], isActive: !buttonsCopy[btnIndex].isActive};
-            this.setState({
-                activeBtn: btn.sortMethod,
-                buttons: buttonsCopy,
-            })
-        }
-        else if (this.state.activeBtn === btn.sortMethod) {
-            const btnIndex = this.state.buttons.findIndex(el => el === btn);
-            const buttonsCopy = [...this.state.buttons];
-            buttonsCopy[btnIndex] = {...buttonsCopy[btnIndex], isActive: !buttonsCopy[btnIndex].isActive};
-            this.setState({
-                activeBtn: buttonsCopy[btnIndex].isActive ? btn.sortMethod : '',
-                buttons: buttonsCopy,
-            })
-        }
-        else if (this.state.activeBtn !== btn.sortMethod) {
-            const btnActiveIndex = this.state.buttons.findIndex(el => el.isActive === true);
-            const btnIndex = this.state.buttons.findIndex(el => el === btn);
+        const activeButtons = this.state.buttons.map(el => {
+            if(el === btn){
+                return {...el, isActive: !el.isActive}
+            }
+            else {
+                return {...el, isActive: false}
+            }
+        });
 
-            const buttonsCopy = [...this.state.buttons];
-            buttonsCopy[btnActiveIndex] = {
-                ...buttonsCopy[btnActiveIndex],
-                isActive: !buttonsCopy[btnActiveIndex].isActive
-            };
-            buttonsCopy[btnIndex] = {...buttonsCopy[btnIndex], isActive: !buttonsCopy[btnIndex].isActive};
+        this.setState({buttons: activeButtons})
 
-            this.setState({
-                activeBtn: btn.sortMethod,
-                buttons: buttonsCopy,
-            })
-        }
     };
 
     onButtonClick = (sortMethod, btn) => {
