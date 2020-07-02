@@ -29,7 +29,7 @@ class App extends React.Component {
         };
 
         super(props);
-        if (localStorage.getItem('todos') === null) {
+        if (!localStorage.getItem('todos')) {
             this.state = {
                 todos: [{label: 'This is your first task', date: '2020-07-01', isDone: false, id: getDateNow()}],
                 searchLabelTerm: '',
@@ -37,6 +37,7 @@ class App extends React.Component {
                 searchDateTerm: '',
                 sortDateTerm: '',
             };
+            debugger
         }
         else {
             this.state = {
@@ -116,10 +117,13 @@ class App extends React.Component {
         const sortFunc = () => {
             if (this.state.sortLabelTerm === 'acc') {
                 return (a, b) => {
-                    if (a.label > b.label) {
+                    let labelA = a.label.toLowerCase();
+                    let labelB = b.label.toLowerCase();
+
+                    if (labelA > labelB) {
                         return 1;
                     }
-                    if (a.label < b.label) {
+                    if (labelA < labelB) {
                         return -1;
                     }
                     return 0;
@@ -127,10 +131,13 @@ class App extends React.Component {
             }
             else if (this.state.sortLabelTerm === 'dec') {
                 return (a, b) => {
-                    if (a.label < b.label) {
+                    let labelA = a.label.toLowerCase();
+                    let labelB = b.label.toLowerCase();
+
+                    if (labelA < labelB) {
                         return 1;
                     }
-                    if (a.label > b.label) {
+                    if (labelA > labelB) {
                         return -1;
                     }
                     return 0;

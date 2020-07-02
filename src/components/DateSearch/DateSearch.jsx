@@ -1,11 +1,26 @@
 import React from 'react';
 import './DateSearch.css';
+import ButtonSort from "../ButtonSort/ButtonSort";
 
 
 class DateSearch extends React.Component {
     state = {
         dateInput: '',
-        activeBtn: ''
+        activeBtn: '',
+        buttons: [
+            {
+                btnClassName: 'btn btn-outline-success btn-bg',
+                bodyClassName: 'fas fa-sort-numeric-up',
+                isActive: false,
+                sortMethod: 'acc'
+            },
+            {
+                btnClassName: 'btn btn-outline-danger btn-bg',
+                bodyClassName: 'fas fa-sort-numeric-down-alt',
+                isActive: false,
+                sortMethod: 'dec'
+            }
+        ]
     };
 
     onDateInputChange = (e) => {
@@ -18,25 +33,46 @@ class DateSearch extends React.Component {
         this.props.onSearchDateChange('');
     };
 
-    buttonToggleActive = (e) => {
+    buttonToggleActive = (btn) => {
         if (!this.state.activeBtn) {
-            e.currentTarget.classList.toggle('active');
-            this.setState({activeBtn: e.currentTarget})
+            const btnIndex = this.state.buttons.findIndex(el => el === btn);
+            const buttonsCopy = [...this.state.buttons];
+            buttonsCopy[btnIndex] = {...buttonsCopy[btnIndex], isActive: !buttonsCopy[btnIndex].isActive};
+            this.setState({
+                activeBtn: btn.sortMethod,
+                buttons: buttonsCopy,
+            })
         }
-        else if (this.state.activeBtn === e.currentTarget) {
-            e.currentTarget.classList.toggle('active');
+        else if (this.state.activeBtn === btn.sortMethod) {
+            const btnIndex = this.state.buttons.findIndex(el => el === btn);
+            const buttonsCopy = [...this.state.buttons];
+            buttonsCopy[btnIndex] = {...buttonsCopy[btnIndex], isActive: !buttonsCopy[btnIndex].isActive};
+            this.setState({
+                activeBtn: buttonsCopy[btnIndex].isActive ? btn.sortMethod : '',
+                buttons: buttonsCopy,
+            })
         }
-        else if (this.state.activeBtn !== e.currentTarget) {
-            if (this.state.activeBtn.classList.contains('active')) {
-                this.state.activeBtn.classList.toggle('active');
-                e.currentTarget.classList.toggle('active');
-                this.setState({activeBtn: e.currentTarget})
-            }
-            else if (!this.state.activeBtn.classList.contains('active')) {
-                e.currentTarget.classList.toggle('active');
-                this.setState({activeBtn: e.currentTarget})
-            }
+        else if (this.state.activeBtn !== btn.sortMethod) {
+            const btnActiveIndex = this.state.buttons.findIndex(el => el.isActive === true);
+            const btnIndex = this.state.buttons.findIndex(el => el === btn);
+
+            const buttonsCopy = [...this.state.buttons];
+            buttonsCopy[btnActiveIndex] = {
+                ...buttonsCopy[btnActiveIndex],
+                isActive: !buttonsCopy[btnActiveIndex].isActive
+            };
+            buttonsCopy[btnIndex] = {...buttonsCopy[btnIndex], isActive: !buttonsCopy[btnIndex].isActive};
+
+            this.setState({
+                activeBtn: btn.sortMethod,
+                buttons: buttonsCopy,
+            })
         }
+    };
+
+    onButtonClick = (sortMethod, btn) => {
+        this.props.onSortDateChange(sortMethod);
+        this.buttonToggleActive(btn);
     };
 
     render() {
@@ -55,22 +91,10 @@ class DateSearch extends React.Component {
                             }}>
                         Clear
                     </button>
-                    <button type="button"
-                            className="btn btn-outline-success btn-bg"
-                            onClick={(e) => {
-                                this.props.onSortDateChange('acc');
-                                this.buttonToggleActive(e)
-                            }}>
-                        <i className="fas fa-sort-numeric-up"/>
-                    </button>
-                    <button type="button"
-                            className="btn btn-outline-danger btn-bg"
-                            onClick={(e) => {
-                                this.props.onSortDateChange('dec');
-                                this.buttonToggleActive(e)
-                            }}>
-                        <i className="fas fa-sort-numeric-down-alt"/>
-                    </button>
+                    <ButtonSort btnInfo={this.state.buttons[0]}
+                                onClick={this.onButtonClick}/>
+                    <ButtonSort btnInfo={this.state.buttons[1]}
+                                onClick={this.onButtonClick}/>
 
                 </div>
 
