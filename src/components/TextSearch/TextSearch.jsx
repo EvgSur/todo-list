@@ -1,6 +1,8 @@
 import React from 'react';
 import './TextSearch.css';
 import ButtonSort from "../ButtonSort/ButtonSort";
+import {onSearchLabelChange, onSortLabelChange} from "../../redux/actionCreators";
+import {connect} from 'react-redux';
 
 
 class TextSearch extends React.Component {
@@ -32,7 +34,7 @@ class TextSearch extends React.Component {
 
     buttonToggleActive = (btn) => {
         const activeButtons = this.state.buttons.map(el => {
-            if(el === btn){
+            if (el === btn) {
                 return {...el, isActive: !el.isActive}
             }
             else {
@@ -58,7 +60,8 @@ class TextSearch extends React.Component {
                     <input className="form-control"
                            placeholder="Поиск по названию"
                            onChange={this.onInputChange}
-                           value={this.state.input} type="text"/>
+                           value={this.state.input}
+                           type="text"/>
                     <ButtonSort btnInfo={this.state.buttons[0]}
                                 onClick={this.onButtonClick}/>
                     <ButtonSort btnInfo={this.state.buttons[1]}
@@ -70,4 +73,9 @@ class TextSearch extends React.Component {
 
 }
 
-export default TextSearch;
+const mapDispatchToProps = {
+    onSearchLabelChange,
+    onSortLabelChange
+};
+
+export default connect(null, mapDispatchToProps)(TextSearch);

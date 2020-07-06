@@ -1,6 +1,8 @@
 import React from 'react';
 import './DateSearch.css';
 import ButtonSort from "../ButtonSort/ButtonSort";
+import {onSearchDateChange, onSortDateChange,} from "../../redux/actionCreators";
+import {connect} from "react-redux";
 
 
 class DateSearch extends React.Component {
@@ -35,7 +37,7 @@ class DateSearch extends React.Component {
 
     buttonToggleActive = (btn) => {
         const activeButtons = this.state.buttons.map(el => {
-            if(el === btn){
+            if (el === btn) {
                 return {...el, isActive: !el.isActive}
             }
             else {
@@ -80,4 +82,9 @@ class DateSearch extends React.Component {
     }
 }
 
-export default DateSearch;
+const mapDispatchToProps = {
+    onSearchDateChange,
+    onSortDateChange
+};
+
+export default connect(null, mapDispatchToProps)(DateSearch);

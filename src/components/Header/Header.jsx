@@ -3,11 +3,11 @@ import './Header.css';
 import ModalWindow from "../ModalWindow/ModalWindow";
 
 
-const Header = ( {onTodoAdd} ) =>{
+const Header = () =>{
     return(
         <div className='header-container'>
             <h1>Todo List</h1>
-            <ModalWindow onTodoAdd={onTodoAdd}/>
+            <ModalWindow/>
         </div>
     )
 };

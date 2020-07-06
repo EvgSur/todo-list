@@ -7,6 +7,7 @@ const ListItem = ({isDone, label, date, onTodoDelete, onTodoDone}) => {
     const listStyle = {
         textDecoration: isDone ? 'line-through' : 'none',
     };
+
     return (
         <li className='list-group-item list-item__container'>
             <span style={listStyle} className='list-item__text'>{label}</span>

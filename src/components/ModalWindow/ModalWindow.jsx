@@ -1,4 +1,6 @@
 import React from 'react';
+import connect from "react-redux/es/connect/connect";
+import {onTodoAdd} from "../../redux/actionCreators";
 
 
 class ModalWindow extends React.Component {
@@ -78,4 +80,8 @@ class ModalWindow extends React.Component {
     }
 }
 
-export default ModalWindow;
+const mapDispatchToProps = {
+    onTodoAdd
+};
+
+export default connect(null, mapDispatchToProps)(ModalWindow);

@@ -1,23 +1,14 @@
 import React from 'react';
 
 
-class ButtonSort extends React.Component {
-    state = {
-        input: '',
-        activeBtn: ''
-    };
-
-
-    render() {
-        return (
-            <button type="button"
-                    className={`${this.props.btnInfo.btnClassName} ${this.props.btnInfo.isActive ? 'active': ''}`}
-                    onClick={() => this.props.onClick(this.props.btnInfo.sortMethod, this.props.btnInfo)}>
-                <i className={this.props.btnInfo.bodyClassName}/>
-            </button>
-        )
-    }
-
-}
+const ButtonSort = (props) => {
+    return (
+        <button type="button"
+                className={`${props.btnInfo.btnClassName} ${props.btnInfo.isActive ? 'active' : ''}`}
+                onClick={() => props.onClick(props.btnInfo.sortMethod, props.btnInfo)}>
+            <i className={props.btnInfo.bodyClassName}/>
+        </button>
+    )
+};
 
 export default ButtonSort;
